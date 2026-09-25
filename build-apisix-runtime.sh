@@ -148,13 +148,37 @@ else
         "$ngx_http_ffi_client_dir"
 fi
 
-cd ngx_multi_upstream_module-${ngx_multi_upstream_module_ver} || exit 1
-./patch.sh ../openresty-${OPENRESTY_VERSION}
-cd ..
+if [[ "$OPENRESTY_VERSION" == 1.31.1.* ]]; then
+    patch -d "openresty-${OPENRESTY_VERSION}/bundle/nginx-1.31.1" -p0 < "$prev_workdir/custom-patches/nginx-1.31.1.patch"
+else
+    cd "ngx_multi_upstream_module-${ngx_multi_upstream_module_ver}" || exit 1
+    ./patch.sh "../openresty-${OPENRESTY_VERSION}"
+    cd ..
+fi
 
-cd "apisix-nginx-module-${apisix_nginx_module_ver}/patch" || exit 1
-./patch.sh ../../openresty-${OPENRESTY_VERSION}
-cd ../..
+if [[ "$OPENRESTY_VERSION" == 1.31.1.* ]]; then
+    custom_patch_dir="$prev_workdir/custom-patches/apisix-nginx-module-1.31.1-full"
+
+    for spec in \
+        "nginx-:openresty-${OPENRESTY_VERSION}/bundle/nginx-1.31.1" \
+        "lua-resty-core-:openresty-${OPENRESTY_VERSION}/bundle/lua-resty-core-0.1.34rc3" \
+        "ngx_lua-:openresty-${OPENRESTY_VERSION}/bundle/ngx_lua-0.10.31rc5" \
+        "ngx_stream_lua-:openresty-${OPENRESTY_VERSION}/bundle/ngx_stream_lua-0.0.19rc4"
+    do
+        prefix="${spec%%:*}"
+        target="${spec#*:}"
+
+        for patch_file in "$custom_patch_dir"/${prefix}*.patch
+        do
+            echo "Applying APISIX compatibility patch: $(basename "$patch_file")"
+            patch --batch -p0 -d "$target" < "$patch_file" || exit 1
+        done
+    done
+else
+    cd "apisix-nginx-module-${apisix_nginx_module_ver}/patch" || exit 1
+    ./patch.sh ../../openresty-${OPENRESTY_VERSION}
+    cd ../..
+fi
 
 cd wasm-nginx-module-${wasm_nginx_module_ver} || exit 1
 ./install-wasmtime.sh

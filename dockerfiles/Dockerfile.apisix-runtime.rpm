@@ -7,6 +7,7 @@ WORKDIR /tmp
 
 ARG VERSION
 ARG RUNTIME_VERSION
+ARG OPENRESTY_VERSION=1.31.1.1
 ARG IMAGE_BASE
 ARG IMAGE_TAG
 ARG CODE_PATH
@@ -15,6 +16,7 @@ ENV IMAGE_BASE=${IMAGE_BASE}
 ENV IMAGE_TAG=${IMAGE_TAG}
 ENV version=${VERSION}
 ENV runtime_version=${RUNTIME_VERSION}
+ENV OPENRESTY_VERSION=${OPENRESTY_VERSION}
 
 COPY ${CODE_PATH} ./
 
@@ -27,3 +29,4 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && ./build-common.sh build_apisix_runtime_rpm \
     # determine dist and write it into /tmp/dist file
     && ./determine-dist.sh
+
