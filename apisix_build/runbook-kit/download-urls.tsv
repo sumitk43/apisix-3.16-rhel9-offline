@@ -1,0 +1,13 @@
+openresty-1.31.1.1.tar.gz	https://openresty.org/download/openresty-1.31.1.1.tar.gz
+apisix-3.18.0.tar.gz	https://github.com/apache/apisix/archive/refs/tags/3.18.0.tar.gz
+openssl-3.4.1.tar.gz	https://github.com/openssl/openssl/releases/download/openssl-3.4.1/openssl-3.4.1.tar.gz
+luarocks-3.11.1.tar.gz	https://luarocks.org/releases/luarocks-3.11.1.tar.gz
+lua-resty-limit-traffic-1.2.0.tar.gz	https://github.com/api7/lua-resty-limit-traffic/archive/refs/tags/v1.2.0.tar.gz
+lua-resty-events-0.2.0.tar.gz	https://github.com/Kong/lua-resty-events/archive/refs/tags/0.2.0.tar.gz
+ngx_multi_upstream_module-1.3.4.tar.gz	https://github.com/api7/ngx_multi_upstream_module/archive/refs/tags/1.3.4.tar.gz
+mod_dubbo-1.0.2.tar.gz	https://github.com/api7/mod_dubbo/archive/refs/tags/1.0.2.tar.gz
+apisix-nginx-module-1.19.10.tar.gz	https://github.com/api7/apisix-nginx-module/archive/refs/tags/1.19.10.tar.gz
+wasm-nginx-module-0.7.0.tar.gz	https://github.com/api7/wasm-nginx-module/archive/refs/tags/0.7.0.tar.gz
+lua-var-nginx-module-v0.5.3.tar.gz	https://github.com/api7/lua-var-nginx-module/archive/refs/tags/v0.5.3.tar.gz
+ngx_http_ffi_client-v0.1.3.tar.gz	https://github.com/api7/ngx_http_ffi_client/archive/refs/tags/v0.1.3.tar.gz
+wasmtime-v0.38.1-x86_64-linux-c-api.tar.xz	https://github.com/bytecodealliance/wasmtime/releases/download/v0.38.1/wasmtime-v0.38.1-x86_64-linux-c-api.tar.xz
